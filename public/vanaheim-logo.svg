@@ -1,0 +1,68 @@
+<svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Outer circle -->
+  <circle cx="200" cy="200" r="185" fill="none" stroke="currentColor" stroke-width="12"/>
+  
+  <!-- Tree trunk -->
+  <rect x="192" y="200" width="16" height="120" fill="currentColor"/>
+  
+  <!-- Main tree body/canopy -->
+  <path d="M 200 80 
+           C 120 80, 60 140, 60 220
+           C 60 300, 120 360, 200 360
+           C 280 360, 340 300, 340 220
+           C 340 140, 280 80, 200 80 Z
+           
+           M 200 120
+           C 150 120, 110 160, 110 210
+           C 110 260, 150 300, 200 300
+           C 250 300, 290 260, 290 210
+           C 290 160, 250 120, 200 120 Z" 
+        fill="currentColor" fill-rule="evenodd"/>
+  
+  <!-- Tree branches - upper canopy -->
+  <g fill="currentColor">
+    <!-- Center top branch -->
+    <path d="M 200 85 L 200 60 L 195 50 L 200 60 L 205 50"/>
+    
+    <!-- Left upper branches -->
+    <path d="M 160 95 L 140 80 L 135 70 M 140 80 L 130 85"/>
+    <path d="M 130 115 L 110 105 L 105 95 M 110 105 L 100 110"/>
+    <path d="M 110 140 L 90 135 L 85 125 M 90 135 L 80 140"/>
+    
+    <!-- Right upper branches -->
+    <path d="M 240 95 L 260 80 L 265 70 M 260 80 L 270 85"/>
+    <path d="M 270 115 L 290 105 L 295 95 M 290 105 L 300 110"/>
+    <path d="M 290 140 L 310 135 L 315 125 M 310 135 L 320 140"/>
+    
+    <!-- Left side branches -->
+    <path d="M 120 170 L 95 165 L 90 155 M 95 165 L 85 170"/>
+    <path d="M 105 200 L 80 200 L 75 190 M 80 200 L 70 205"/>
+    
+    <!-- Right side branches -->
+    <path d="M 280 170 L 305 165 L 310 155 M 305 165 L 315 170"/>
+    <path d="M 295 200 L 320 200 L 325 190 M 320 200 L 330 205"/>
+  </g>
+  
+  <!-- Root system -->
+  <g fill="currentColor">
+    <!-- Main roots -->
+    <path d="M 192 320 L 170 340 L 160 350 L 150 355"/>
+    <path d="M 208 320 L 230 340 L 240 350 L 250 355"/>
+    
+    <!-- Center bottom roots -->
+    <path d="M 200 320 L 200 340 L 195 350 L 190 360"/>
+    <path d="M 200 340 L 205 350 L 210 360"/>
+    
+    <!-- Side roots -->
+    <path d="M 185 325 L 160 345 L 145 355 L 130 365"/>
+    <path d="M 215 325 L 240 345 L 255 355 L 270 365"/>
+    
+    <!-- Smaller root details -->
+    <path d="M 170 340 L 160 345 M 170 340 L 165 350"/>
+    <path d="M 230 340 L 240 345 M 230 340 L 235 350"/>
+    
+    <!-- Root interweaving -->
+    <path d="M 180 350 C 190 345, 210 345, 220 350"/>
+    <path d="M 160 355 C 180 360, 220 360, 240 355"/>
+  </g>
+</svg>

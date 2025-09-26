@@ -1,102 +1,361 @@
+"use client";
+
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  useEffect(() => {
+    const controlNavbar = () => {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        // Scrolling down & past 100px
+        setIsVisible(false);
+      } else {
+        // Scrolling up
+        setIsVisible(true);
+      }
+
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener("scroll", controlNavbar);
+    return () => window.removeEventListener("scroll", controlNavbar);
+  }, [lastScrollY]);
+  return (
+    <div
+      className="min-h-screen pt-20"
+      style={{ background: "var(--background)", color: "var(--foreground)" }}
+    >
+      {/* Header */}
+      <header
+        className={`fixed top-0 left-0 right-0 z-50 flex justify-between items-center p-6 md:p-8 backdrop-blur-md border-b border-opacity-20 transition-transform duration-300 ease-in-out ${
+          isVisible ? "translate-y-0" : "-translate-y-full"
+        }`}
+        style={{
+          background: "rgba(240, 237, 228, 0.95)",
+          borderColor: "var(--border)",
+        }}
+      >
+        <div className="flex items-center gap-3">
+          <Image
+            src="/vanaheim-logo.png"
+            alt="Vanaheim Software Development"
+            width={40}
+            height={40}
+            className="rounded-full"
+          />
+          <div>
+            <h1
+              className="text-xl font-bold"
+              style={{ color: "var(--primary)" }}
+            >
+              VANAHEIM
+            </h1>
+            <p className="text-sm" style={{ color: "var(--text-muted)" }}>
+              SOFTWARE DEVELOPMENT
+            </p>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <nav className="hidden md:flex gap-6">
+          <a
+            href="#services"
+            className="hover:opacity-70 transition-opacity"
+            style={{ color: "var(--primary)" }}
+          >
+            Services
+          </a>
+          <a
+            href="#about"
+            className="hover:opacity-70 transition-opacity"
+            style={{ color: "var(--primary)" }}
+          >
+            About
+          </a>
+          <a
+            href="#contact"
+            className="hover:opacity-70 transition-opacity"
+            style={{ color: "var(--primary)" }}
+          >
+            Contact
+          </a>
+        </nav>
+      </header>
+
+      {/* Hero Section */}
+      <section className="text-center px-6 md:px-8 py-16 md:py-24 section-with-logo">
+        <div className="max-w-4xl mx-auto">
+          <div className="mb-12 flex justify-center">
+            <Image
+              src="/vanaheim-logo.png"
+              alt="Vanaheim Tree Logo"
+              width={240}
+              height={240}
+              className="hero-logo"
+            />
+          </div>
+          <h2 className="text-4xl md:text-6xl font-bold mb-6 gradient-text">
+            Growing Digital Solutions
+          </h2>
+          <p
+            className="text-lg md:text-xl mb-8 max-w-2xl mx-auto"
+            style={{ color: "var(--text-muted)" }}
+          >
+            Professional software development services that grow with your
+            business. From concept to deployment, I create robust, scalable
+            solutions tailored to your needs.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="#contact" className="btn-primary">
+              Start Your Project
+            </a>
+            <a href="#services" className="btn-outline">
+              View Services
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Services Section */}
+      <section
+        id="services"
+        className="px-6 md:px-8 py-16 md:py-24"
+        style={{ background: "var(--card-background)" }}
+      >
+        <div className="max-w-6xl mx-auto">
+          <h3 className="text-3xl md:text-4xl font-bold text-center mb-12 gradient-text">
+            Services
+          </h3>
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="card p-6 text-center">
+              <div
+                className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center"
+                style={{ background: "var(--accent)" }}
+              >
+                <span className="text-2xl text-white">🌐</span>
+              </div>
+              <h4
+                className="text-xl font-semibold mb-3"
+                style={{ color: "var(--primary)" }}
+              >
+                Web Applications
+              </h4>
+              <p style={{ color: "var(--text-muted)" }}>
+                Modern, responsive web applications built with cutting-edge
+                technologies. From simple websites to complex web platforms.
+              </p>
+            </div>
+            <div className="card p-6 text-center">
+              <div
+                className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center"
+                style={{ background: "var(--accent)" }}
+              >
+                <span className="text-2xl text-white">🎓</span>
+              </div>
+              <h4
+                className="text-xl font-semibold mb-3"
+                style={{ color: "var(--primary)" }}
+              >
+                Courses & Workshops
+              </h4>
+              <p style={{ color: "var(--text-muted)" }}>
+                Comprehensive programming courses and hands-on workshops to grow
+                your development skills. From beginner fundamentals to advanced
+                techniques.
+              </p>
+            </div>
+            <div className="card p-6 text-center">
+              <div
+                className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center"
+                style={{ background: "var(--accent)" }}
+              >
+                <span className="text-2xl text-white">⚙️</span>
+              </div>
+              <h4
+                className="text-xl font-semibold mb-3"
+                style={{ color: "var(--primary)" }}
+              >
+                Custom Software
+              </h4>
+              <p style={{ color: "var(--text-muted)" }}>
+                Tailored software solutions designed to solve your specific
+                business challenges and streamline your operations.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section id="about" className="px-6 md:px-8 py-16 md:py-24">
+        <div className="max-w-4xl mx-auto">
+          <h3 className="text-3xl md:text-4xl font-bold text-center mb-12 gradient-text">
+            About Vanaheim
+          </h3>
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+              <p
+                className="text-lg mb-6"
+                style={{ color: "var(--text-muted)" }}
+              >
+                Like the mighty tree in our logo, great software grows from
+                strong roots. With deep expertise in modern technologies and a
+                commitment to quality, I help businesses flourish in the digital
+                landscape.
+              </p>
+              <p
+                className="text-lg mb-6"
+                style={{ color: "var(--text-muted)" }}
+              >
+                Every project is approached with careful planning, clean code
+                practices, and a focus on long-term sustainability. Your success
+                is my success.
+              </p>
+              <div className="flex flex-wrap gap-3">
+                <span
+                  className="px-3 py-1 text-sm rounded-full"
+                  style={{
+                    background: "var(--border)",
+                    color: "var(--primary)",
+                  }}
+                >
+                  React
+                </span>
+                <span
+                  className="px-3 py-1 text-sm rounded-full"
+                  style={{
+                    background: "var(--border)",
+                    color: "var(--primary)",
+                  }}
+                >
+                  Next.js
+                </span>
+                <span
+                  className="px-3 py-1 text-sm rounded-full"
+                  style={{
+                    background: "var(--border)",
+                    color: "var(--primary)",
+                  }}
+                >
+                  Vue
+                </span>
+                <span
+                  className="px-3 py-1 text-sm rounded-full"
+                  style={{
+                    background: "var(--border)",
+                    color: "var(--primary)",
+                  }}
+                >
+                  TypeScript
+                </span>
+                <span
+                  className="px-3 py-1 text-sm rounded-full"
+                  style={{
+                    background: "var(--border)",
+                    color: "var(--primary)",
+                  }}
+                >
+                  Python
+                </span>
+                <span
+                  className="px-3 py-1 text-sm rounded-full"
+                  style={{
+                    background: "var(--border)",
+                    color: "var(--primary)",
+                  }}
+                >
+                  C#
+                </span>
+                <span
+                  className="px-3 py-1 text-sm rounded-full"
+                  style={{
+                    background: "var(--border)",
+                    color: "var(--primary)",
+                  }}
+                >
+                  PHP
+                </span>
+                <span
+                  className="px-3 py-1 text-sm rounded-full"
+                  style={{
+                    background: "var(--border)",
+                    color: "var(--primary)",
+                  }}
+                >
+                  Laravel
+                </span>
+              </div>
+            </div>
+            <div className="flex justify-center">
+              <div className="relative">
+                <Image
+                  src="/vanaheim-logo.png"
+                  alt="Vanaheim Philosophy"
+                  width={280}
+                  height={280}
+                  className="drop-shadow-xl opacity-90"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section
+        id="contact"
+        className="px-6 md:px-8 py-16 md:py-24"
+        style={{ background: "var(--card-background)" }}
+      >
+        <div className="max-w-4xl mx-auto text-center">
+          <h3 className="text-3xl md:text-4xl font-bold mb-8 gradient-text">
+            Let's Grow Together
+          </h3>
+          <p className="text-lg mb-8" style={{ color: "var(--text-muted)" }}>
+            Ready to plant the seeds of your next digital project? Let's discuss
+            how we can bring your vision to life.
+          </p>
+          <div className="card p-8 max-w-2xl mx-auto">
+            <p className="text-lg mb-6" style={{ color: "var(--primary)" }}>
+              Contact me to discuss your project requirements and get a
+              personalized quote.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a href="mailto:contact@vanaheim.dev" className="btn-primary">
+                Send Email
+              </a>
+              <a href="#" className="btn-outline">
+                Schedule Call
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer
+        className="text-center px-6 md:px-8 py-8"
+        style={{ borderTop: "1px solid var(--border)" }}
+      >
+        <div className="flex items-center justify-center gap-3 mb-4">
           <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
+            src="/vanaheim-logo.png"
+            alt="Vanaheim"
+            width={24}
+            height={24}
+            className="opacity-80"
           />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+          <span style={{ color: "var(--primary)" }}>
+            VANAHEIM SOFTWARE DEVELOPMENT
+          </span>
+        </div>
+        <p style={{ color: "var(--text-muted)" }}>
+          © 2025 Vanaheim Software Development. Growing digital solutions with
+          deep roots.
+        </p>
       </footer>
     </div>
   );
