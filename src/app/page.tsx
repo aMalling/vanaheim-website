@@ -312,10 +312,10 @@ export default function Home() {
       >
         <div className="max-w-4xl mx-auto text-center">
           <h3 className="text-3xl md:text-4xl font-bold mb-8 gradient-text">
-            Let's Grow Together
+            Lets Grow Together
           </h3>
           <p className="text-lg mb-8" style={{ color: "var(--text-muted)" }}>
-            Ready to plant the seeds of your next digital project? Let's discuss
+            Ready to plant the seeds of your next digital project? Lets discuss
             how we can bring your vision to life.
           </p>
           <div className="card p-8 max-w-2xl mx-auto">
